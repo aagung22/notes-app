@@ -1,22 +1,28 @@
-import Footer from "@/components/footer";
-import "./globals.css";
+import { cookies } from "next/headers";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
+import "./globals.css";
 
 export const metadata = {
-  title: "NotesApp - Agung",
-  description: "Aplikasi Notes Sedeherna",
+  title: "Notes App",
+  description: "Mari buat catatan anda",
+  icons: {
+    icon: "/favicon.ico",
+  }
 };
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
-      <body className={"antialiased flex flex-col min-h-screen bg-gray-50 text-gray-800"}>
-        <Navbar />
-        <main className="flex-grow p-4 py-6">{children}</main>
+      <body className={`antialiased flex flex-col min-h-screen`}>
+        {/* Pass isLoggedIn to Navbar */}
+        <Navbar/>
+        <section className="flex-grow">{children}</section>
         <Footer />
-        <Toaster/>
+        <Toaster />
       </body>
     </html>
   );
-}
+};

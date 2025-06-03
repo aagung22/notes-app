@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,53 +14,69 @@ import {
 import { Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 export function DialogDelete({ note }) {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [token, setToken] = useState(null);
   const { toast } = useToast();
+  const router = useRouter();
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    setToken(storedToken);
+  }, []);
 
   const handleDelete = async () => {
+    if (!token) {
+      toast({
+        variant: "destructive",
+        title: "Token tidak tersedia",
+        description: "Anda belum login atau token tidak ditemukan.",
+      });
+      return;
+    }
+
     setLoading(true);
-    try{
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/notes`,{
-        method : "DELETE",
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/notes`, {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id_notes: note.id_notes,
-        id_user: note.id_user,
-      }),
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id_notes: note.id_notes }),
       });
 
-      if(!res.ok) throw new Error("Gagal Menghapus catatan");
+      if (!res.ok) throw new Error("Gagal menghapus catatan");
 
       toast({
-        className: cn("bg-red-700", "text-white"),
-        title: "Catatan berhasil dihapus",
+        className: cn("bg-red-500", "text-white"),
+        title: "Catatan dihapus",
         description: "Catatan berhasil dihapus",
       });
 
       setOpen(false);
-      window.location.reload();
-      } catch (error) {
-        toast({
-          title: "Gagal Menghapus catatan",
-          description: "Gagal menghapus catatan",
-        });
-      }finally {
-        setLoading(false);
-      }
-    };
+      window.location.reload(); // refresh tampilan setelah delete
+    } catch (err) {
+      toast({
+        title: "Gagal menghapus catatan",
+        description: "Terjadi kesalahan saat menghapus",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          variant="destructive"
-          className="w-[40px] h-[40px] bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center">
-          <Trash2 size={24} />
+          type="button"
+          className="w-9 h-9 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center hover:brightness-110 transition"
+        >
+          <Trash2 size={18} />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md bg-slate-50">
