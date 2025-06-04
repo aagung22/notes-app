@@ -183,7 +183,7 @@ export default function EditNotePage({ params }) {
               <Button
                 onClick={handleUpdate}
                 disabled={loading}
-                className="bg-cyan-500 hover:bg-cyan-600 text-white"
+                className="relative overflow-hidden group bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 hover:from-cyan-400 hover:via-purple-400 hover:to-pink-400 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
               >
                 {loading ? "Menyimpan..." : "Simpan Perubahan"}
               </Button>

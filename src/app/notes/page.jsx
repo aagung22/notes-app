@@ -98,8 +98,8 @@ const AllNotesPage = () => {
         ) : (
           <Tabs defaultValue="my" className="text-white">
             <TabsList className="flex justify-center bg-white/10 rounded-xl mb-6 bg-transparent">
-              <TabsTrigger value="my" className="text-white data-[state=active]:bg-white/20 px-6 py-2 rounded-xl">Catatan Saya</TabsTrigger>
-              <TabsTrigger value="others" className="text-white data-[state=active]:bg-white/20 px-6 py-2 rounded-xl">Catatan Orang Lain</TabsTrigger>
+              <TabsTrigger value="my" className="text-white data-[state=active]:bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 hover:from-cyan-400 hover:via-purple-400 hover:to-pink-400 px-6 py-2 rounded-xl">Catatan Saya</TabsTrigger>
+              <TabsTrigger value="others" className="text-white data-[state=active]:bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 hover:from-cyan-400 hover:via-purple-400 hover:to-pink-400 px-6 py-2 rounded-xl">Catatan Orang Lain</TabsTrigger>
             </TabsList>
 
             <TabsContent value="my">

@@ -54,7 +54,7 @@ export default function Navbar() {
             <button
               aria-label="Toggle menu"
               onClick={toggleSidebar}
-              className="p-2 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="p-2 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-white"
             >
               <Menu className="text-white" size={24} />
             </button>
@@ -148,7 +148,7 @@ export default function Navbar() {
             <button
               aria-label="Close menu"
               onClick={closeSidebar}
-              className="p-1 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="p-1 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-white"
             >
               <X className="text-white" size={24} />
             </button>
@@ -157,7 +157,7 @@ export default function Navbar() {
           <nav className="flex flex-col space-y-3 mt-6">
             {[
               { href: "/", label: "Home" },
-              { href: "/about", label: "About Us" },
+              { href: "/about", label: "About Me" },
               { href: "/notes", label: "List Notes" },
             ].map((link) => (
               <Link
@@ -166,7 +166,7 @@ export default function Navbar() {
                 onClick={closeSidebar}
                 className={`relative px-4 py-2 rounded-md font-medium transition-colors ${
                   isActive(link.href)
-                    ? "bg-slate-800 text-emerald-400"
+                    ? "bg-slate-800 text-white"
                     : "text-white hover:bg-slate-700"
                 }`}
               >
@@ -179,7 +179,7 @@ export default function Navbar() {
                 onClick={closeSidebar}
                 className={`relative px-4 py-2 rounded-md font-medium transition-colors ${
                   isActive("/notes/create")
-                    ? "bg-slate-800 text-emerald-400"
+                    ? "bg-slate-800 text-white"
                     : "text-white hover:bg-slate-700"
                 }`}
               >
